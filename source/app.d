@@ -9,6 +9,7 @@ void main()
 
 	auto p1 = Player(Vector2(10, 10), Vector2(100, 50), Colors.RED);
 	auto p2 = Player(Vector2(700, 700), Vector2(100, 50), Colors.BLUE);
+	auto ball = Ball();
 
 	validateRaylibBinding();
 	InitWindow(800, 800, "windowName");
@@ -42,6 +43,8 @@ void main()
 			p2.position.y -= 2.0f;
 		if (IsKeyDown(KeyboardKey.KEY_S))
 			p2.position.y += 2.0f;
+		// DrawCircle(int centerX, int centerY, float radius, Color color);      
+		DrawCircle(ball.position.x.to!int, ball.position.y.to!int, ball.radius, Colors.GRAY);
 
 		EndDrawing();
 	}
