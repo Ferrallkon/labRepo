@@ -8,6 +8,7 @@ void main()
 {
 
 	auto p1 = Player(Vector2(100.0f, 200.0f), Vector2(100.0f, 200.0f));
+    auto ball = Ball();
 
 	validateRaylibBinding();
 	InitWindow(800, 800, "windowName");
@@ -22,8 +23,8 @@ void main()
 		DrawRectangle(p1.position.x.to!int, p1.position.y.to!int, p1.position.x.to!int, p1.position.y.to!int, Colors
 				.RED);
 
-		// void DrawCircle(int centerX, int centerY, float radius, Color color);      
-		// DrawCircle(p1.pos.x.to!int, p1.pos.y.to!int, 100.0, Colors.BLUE);
+		// DrawCircle(int centerX, int centerY, float radius, Color color);      
+        DrawCircle(ball.position.x.to!int, ball.position.y.to!int, ball.radius, Colors.GRAY);
 
 		EndDrawing();
 	}
