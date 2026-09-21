@@ -7,7 +7,8 @@ import packages.players;
 void main()
 {
 
-	auto p1 = Player(Vector2(100.0f, 200.0f), Vector2(100.0f, 200.0f));
+	auto p1 = Player(Vector2(10, 10), Vector2(100, 50), Colors.RED);
+	auto p2 = Player(Vector2(700, 700), Vector2(100, 50), Colors.BLUE);
 
 	validateRaylibBinding();
 	InitWindow(800, 800, "windowName");
@@ -18,12 +19,29 @@ void main()
 		BeginDrawing();
 		ClearBackground(Colors.RAYWHITE);
 
-		// DrawRectangle(int posX, int posY, int width, int height, Color color);
-		DrawRectangle(p1.position.x.to!int, p1.position.y.to!int, p1.position.x.to!int, p1.position.y.to!int, Colors
-				.RED);
+		DrawRectangle(p1.position.x.to!int, p1.position.y.to!int, p1.size.x.to!int, p1.size.y.to!int, p1
+				.color);
 
-		// void DrawCircle(int centerX, int centerY, float radius, Color color);      
-		// DrawCircle(p1.pos.x.to!int, p1.pos.y.to!int, 100.0, Colors.BLUE);
+		DrawRectangle(p2.position.x.to!int, p2.position.y.to!int, p2.size.x.to!int, p2.size.y.to!int, p2
+				.color);
+
+		if (IsKeyDown(KeyboardKey.KEY_RIGHT))
+			p1.position.x += 2.0f;
+		if (IsKeyDown(KeyboardKey.KEY_LEFT))
+			p1.position.x -= 2.0f;
+		if (IsKeyDown(KeyboardKey.KEY_UP))
+			p1.position.y -= 2.0f;
+		if (IsKeyDown(KeyboardKey.KEY_DOWN))
+			p1.position.y += 2.0f;
+
+		if (IsKeyDown(KeyboardKey.KEY_D))
+			p2.position.x += 2.0f;
+		if (IsKeyDown(KeyboardKey.KEY_A))
+			p2.position.x -= 2.0f;
+		if (IsKeyDown(KeyboardKey.KEY_W))
+			p2.position.y -= 2.0f;
+		if (IsKeyDown(KeyboardKey.KEY_S))
+			p2.position.y += 2.0f;
 
 		EndDrawing();
 	}

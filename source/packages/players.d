@@ -3,8 +3,9 @@ import raylib;
 
 struct Player
 {
-    Vector2 size;
     Vector2 position;
+    Vector2 size;
+    Color color;
 }
 
 struct Ball
