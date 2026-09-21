@@ -2,6 +2,6 @@
 
 this is the description!
 
-This is my edit -MJ
+This is the changed edit
 
 This is Cris edit :)
