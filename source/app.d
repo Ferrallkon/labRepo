@@ -1,6 +1,17 @@
 import std.stdio;
+import raylib;
 
 void main()
 {
-	writeln("Edit source/app.d to start your project.");
+	validateRaylibBinding();
+	InitWindow(800, 800, "windowName");
+	SetTargetFPS(60);
+
+	while (!WindowShouldClose())
+	{
+		BeginDrawing();
+		ClearBackground(Colors.RAYWHITE);
+		EndDrawing();
+	}
+	CloseWindow();
 }
