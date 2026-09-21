@@ -1,0 +1,1 @@
+{"libs" : ["raylib"], "lflags-posix" : ["-L."], "lflags-osx" : ["-rpath", "@executable_path/"], "lflags-linux" : ["-rpath=$$ORIGIN"], "description" : "A minimal D application.", "name" : "labrepo", "dependencies" : {"raylib-d" : "~>6.0.1"}, "authors" : ["Cristian Sanchez Velasco"], "copyright" : "Copyright © 2026, Cristian Sanchez Velasco", "license" : "proprietary"}

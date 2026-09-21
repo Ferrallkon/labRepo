@@ -1,0 +1,17 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/labrepo
+labrepo.so
+labrepo.dylib
+labrepo.dll
+liblabrepo.a
+labrepo.a
+labrepo.lib
+labrepo-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
