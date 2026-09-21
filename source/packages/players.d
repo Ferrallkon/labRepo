@@ -1,20 +1,13 @@
 module packages.players;
+import raylib;
 
-struct Player {
-    char direction; // left right up down l r u d
-    bool ballContact; // touching a ball
-    float speed; // speed of movement
-
-
-
+struct Player
+{
+    Vector2 size;
+    Vector2 position;
 }
 
-
-
-struct Ball {
-
-
-
-
+struct Ball
+{
 
 }
