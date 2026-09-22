@@ -9,8 +9,8 @@ import core.sys.linux.input_event_codes;
 void main()
 {
 
-	auto p1 = Player(Vector2(10, 10), Colors.RED);
-	auto p2 = Player(Vector2(690, 740), Colors.BLUE);
+	auto p1 = Player(Vector2(70, 70), Colors.RED);
+	auto p2 = Player(Vector2(690, 720), Colors.BLUE);
 	auto ball = Ball();
 
 	validateRaylibBinding();
@@ -19,8 +19,8 @@ void main()
 
 	void reset()
 	{
-		p1.position = Vector2(10, 10);
-		p2.position = Vector2(690, 740);
+		p1.position = Vector2(40, 50);
+		p2.position = Vector2(690, 720);
 		ball.position = Vector2(400.0f, 400.0f);
 		ball.speed = Vector2(0.0f, 0.0f);
 	}
@@ -32,8 +32,6 @@ void main()
 
 		p1.drawPlayer();
 		p2.drawPlayer();
-
-		ball.drawBall(); // ball method
 
 		ball.drawBall(); // ball method
 
@@ -63,7 +61,6 @@ void main()
 		ball.checkCollisionWithPlayer(p1); // ball method
 		ball.checkCollisionWithPlayer(p2);
 		ball.update(); // ball method
-		ball.drawBall();
 
 		EndDrawing();
 	}
