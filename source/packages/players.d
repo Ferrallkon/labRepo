@@ -1,5 +1,6 @@
 module packages.players;
 import raylib;
+import std.stdio;
 import std.conv;
 
 struct Player
@@ -33,15 +34,16 @@ struct Ball
     {
         position.x += speed.x;
         position.y += speed.y;
+        speed.x *= 0.99; 
+        speed.y *= 0.99; 
+        writeln(speed);
     }
 
     void checkCollisionWithPlayer(Player player)
     {
-        if (CheckCollisionCircles(player.position, player.radius, position, radius)){
-            speed.x = ((position.x - player.position.x)/player.position.x);
-            speed.x *= 15;
-            speed.y = ((position.y - player.position.y)/player.position.y);
-            speed.y *= 15;
+        if(CheckCollisionCircles(player.position, player.radius, position, radius)){
+            speed.x = ((position.x - player.position.x)/15);
+            speed.y = ((position.y - player.position.y)/15);
         }
     }
 }
