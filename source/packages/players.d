@@ -35,14 +35,10 @@ struct Ball
         position.y += speed.y;
     }
 
-    void checkCollisionWithPlayer(Rectangle player)
+    void checkCollisionWithPlayer(Player player)
     {
-        if (CheckCollisionCircleRec(position, radius, player))
-        {
-            float playerCenterX = player.x + (player.width / 2.0f); // center of players x axis
-            float playerCenterY = player.y + (player.height / 2.0f); // center of players y axis
-
-            if (position.x > playerCenterX)
+        if (CheckCollisionCircles(player.position, player.radius, position, radius)){
+            if (position.x > player.position.x)
             { // if ball is to the right of center
                 speed.x = 1.0f; // ball move right
             }
@@ -50,7 +46,7 @@ struct Ball
             { // if ball is to the left
                 speed.x = -1.0f; // ball move left
             }
-            if (position.y > playerCenterY)
+            if (position.y > player.position.y)
             { // if ball is below center 
                 speed.y = 1.0f; // ball move down because y axis top left is 0
             }

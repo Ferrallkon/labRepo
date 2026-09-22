@@ -60,12 +60,8 @@ void main()
 		if (IsKeyDown(KeyboardKey.KEY_DOWN))
 			p2.position.y += 2.0f;
 
-		// // convert players to Rectangle to use CheckCollisionCircleRec()
-		auto p1rec = Rectangle(p1.position.x, p1.position.y, p1.size.x, p1.size.y);
-		auto p2rec = Rectangle(p2.position.x, p2.position.y, p2.size.x, p2.size.y);
-
-		ball.checkCollisionWithPlayer(p1rec); // ball method
-		ball.checkCollisionWithPlayer(p2rec);
+		ball.checkCollisionWithPlayer(p1); // ball method
+		ball.checkCollisionWithPlayer(p2);
 		ball.update(); // ball method
 		ball.drawBall();
 
