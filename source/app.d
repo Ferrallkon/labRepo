@@ -19,8 +19,8 @@ void main()
 
 	void reset()
 	{
-		p1.position = Vector2(40, 50);
-		p2.position = Vector2(690, 720);
+		p1.position = Vector2(50, 50);
+		p2.position = Vector2(750, 750);
 		ball.position = Vector2(400.0f, 400.0f);
 		ball.speed = Vector2(0.0f, 0.0f);
 	}
@@ -28,7 +28,7 @@ void main()
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
-		ClearBackground(Colors.RAYWHITE);
+		ClearBackground(Colors.BLACK);
 
 		p1.drawPlayer();
 		p2.drawPlayer();
