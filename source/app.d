@@ -17,6 +17,7 @@ void main()
 	{
 		BeginDrawing();
 		ClearBackground(Colors.BLACK);
+        DrawLine(0, 400, 800, 400, Colors.GRAY);
 
 		p1.drawPlayer();
 		p2.drawPlayer();
