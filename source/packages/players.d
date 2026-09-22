@@ -51,8 +51,8 @@ struct Ball
         }
         position.x += speed.x;
         position.y += speed.y;
-        speed.x *= 0.99;
-        speed.y *= 0.99;
+        speed.x *= 0.991;
+        speed.y *= 0.991;
     }
 
     void checkCollisionWithPlayer(Player player)
@@ -60,9 +60,7 @@ struct Ball
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
             speed.x = ((position.x - player.position.x) / 10);
-            speed.x *= 2;
             speed.y = ((position.y - player.position.y) / 10);
-            speed.y *= 2;
         }
     }
 }
