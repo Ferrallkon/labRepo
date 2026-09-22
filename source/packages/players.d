@@ -1,22 +1,18 @@
 module packages.players;
 import raylib;
-import std.stdio;
 import std.conv;
 import std.stdio;
 
 struct Player
 {
-
     Vector2 position;
     Color color;
-
     float radius = 50;
 
     void drawPlayer()
     {
         DrawCircle(position.x.to!int, position.y.to!int, radius, color);
     }
-
 }
 
 struct Ball
@@ -33,25 +29,48 @@ struct Ball
 
     void update()
     {
-
-        if (position.x >= 800 - radius) // rigth wall
+        if(position.x >= 800 - radius) // right wall
         {
-            speed.x = ((position.x - 800) / 15);
+            position.x = 800 - radius; // bring it back in bounds if it is out of bounds
+            speed.x *= -1;
         }
-
+        if(position.x <= radius) //left wall
+        {
+            position.x = radius;
+            speed.x *= -1;
+        }
+        if(position.y >= 800 - radius) //bottom wall
+        {
+            position.y = 800 - radius;
+            speed.y *= -1;
+        }
+        if(position.y <= radius) //top wall
+        {
+            position.y = radius;
+            speed.y *= -1;
+        }
         position.x += speed.x;
         position.y += speed.y;
         speed.x *= 0.99;
         speed.y *= 0.99;
-        writeln(speed);
     }
 
     void checkCollisionWithPlayer(Player player)
     {
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
-            speed.x = ((position.x - player.position.x) / 15);
-            speed.y = ((position.y - player.position.y) / 15);
+            speed.x = ((position.x - player.position.x) / 10);
+            speed.x *= 2;
+            speed.y = ((position.y - player.position.y) / 10);
+            speed.y *= 2;
         }
     }
+}
+
+void reset(ref Player p1, ref Player p2, ref Ball ball)
+{
+	p1.position = Vector2(50, 50);
+	p2.position = Vector2(750, 750);
+	ball.position = Vector2(400.0f, 400.0f);
+	ball.speed = Vector2(0.0f, 0.0f);
 }
