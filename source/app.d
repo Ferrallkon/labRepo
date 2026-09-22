@@ -52,7 +52,7 @@ void main()
 			if (p1.position.y > 0 + p1.radius)
 				p1.position.y -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_S))
-			if (p1.position.y < 800 - p1.radius)
+			if (p1.position.y < 400 - p1.radius)
 				p1.position.y += speedFactor;
 
 		if (IsKeyDown(KeyboardKey.KEY_RIGHT))
@@ -62,7 +62,7 @@ void main()
 			if (p2.position.x > 0 + p2.radius)
 				p2.position.x -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_UP))
-			if (p2.position.y > 0 + p2.radius)
+			if (p2.position.y > 400 + p2.radius)
 				p2.position.y -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_DOWN))
 			if (p2.position.y < 800 - p2.radius)
