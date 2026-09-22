@@ -17,6 +17,13 @@ void main()
 	InitWindow(800, 800, "Game");
 	SetTargetFPS(60);
 
+    void reset(){
+        p1.position = Vector2(10, 10);
+        p2.position = Vector2(690, 740);
+        ball.position = Vector2(400.0f, 400.0f);
+        ball.speed = Vector2(0.0f, 0.0f);
+    }
+
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
@@ -31,10 +38,7 @@ void main()
         ball.drawBall(); // ball method
 
         if(IsKeyPressed(KeyboardKey.KEY_R)){ // press 'R' for quick reset, just for testing purposes
-            p1.position = Vector2(10, 10);
-            p2.position = Vector2(690, 740);
-            ball.position = Vector2(400.0f, 400.0f);
-            ball.speed = Vector2(0.0f, 0.0f);
+            reset();
         }
 
 		if (IsKeyDown(KeyboardKey.KEY_D))
