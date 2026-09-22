@@ -9,8 +9,8 @@ import core.sys.linux.input_event_codes;
 void main()
 {
 
-	auto p1 = Player(Vector2(70, 70), Colors.RED);
-	auto p2 = Player(Vector2(690, 720), Colors.BLUE);
+	auto p1 = Player(Vector2(50, 50), Colors.RED);
+	auto p2 = Player(Vector2(750, 750), Colors.BLUE);
 	auto ball = Ball();
 
 	validateRaylibBinding();
@@ -40,28 +40,37 @@ void main()
 			reset();
 		}
 
+		const speedFactor = 5.0f;
+
 		if (IsKeyDown(KeyboardKey.KEY_D))
-			p1.position.x += 2.0f;
+			if (p1.position.x < 800 - p1.radius)
+				p1.position.x += speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_A))
-			p1.position.x -= 2.0f;
+			if (p1.position.x > 0 + p1.radius)
+				p1.position.x -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_W))
-			p1.position.y -= 2.0f;
+			if (p1.position.y > 0 + p1.radius)
+				p1.position.y -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_S))
-			p1.position.y += 2.0f;
+			if (p1.position.y < 800 - p1.radius)
+				p1.position.y += speedFactor;
 
 		if (IsKeyDown(KeyboardKey.KEY_RIGHT))
-			p2.position.x += 2.0f;
+			if (p2.position.x < 800 - p2.radius)
+				p2.position.x += speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_LEFT))
-			p2.position.x -= 2.0f;
+			if (p2.position.x > 0 + p2.radius)
+				p2.position.x -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_UP))
-			p2.position.y -= 2.0f;
+			if (p2.position.y > 0 + p2.radius)
+				p2.position.y -= speedFactor;
 		if (IsKeyDown(KeyboardKey.KEY_DOWN))
-			p2.position.y += 2.0f;
+			if (p2.position.y < 800 - p2.radius)
+				p2.position.y += speedFactor;
 
 		ball.checkCollisionWithPlayer(p1); // ball method
 		ball.checkCollisionWithPlayer(p2);
 		ball.update(); // ball method
-
 		EndDrawing();
 	}
 	CloseWindow();
