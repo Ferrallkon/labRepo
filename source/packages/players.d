@@ -29,22 +29,22 @@ struct Ball
 
     void update()
     {
-        if(position.x >= 800 - radius) // right wall
+        if (position.x >= 800 - radius) // right wall
         {
             position.x = 800 - radius; // bring it back in bounds if it is out of bounds
             speed.x *= -1;
         }
-        if(position.x <= radius) //left wall
+        if (position.x <= radius) //left wall
         {
             position.x = radius;
             speed.x *= -1;
         }
-        if(position.y >= 800 - radius) //bottom wall
+        if (position.y >= 800 - radius) //bottom wall
         {
             position.y = 800 - radius;
             speed.y *= -1;
         }
-        if(position.y <= radius) //top wall
+        if (position.y <= radius) //top wall
         {
             position.y = radius;
             speed.y *= -1;
@@ -67,8 +67,8 @@ struct Ball
 
 void reset(ref Player p1, ref Player p2, ref Ball ball)
 {
-	p1.position = Vector2(50, 50);
-	p2.position = Vector2(750, 750);
-	ball.position = Vector2(400.0f, 400.0f);
-	ball.speed = Vector2(0.0f, 0.0f);
+    p1.position = Vector2(50, 50);
+    p2.position = Vector2(750, 750);
+    ball.position = Vector2(400.0f, 400.0f);
+    ball.speed = Vector2(0.0f, 0.0f);
 }

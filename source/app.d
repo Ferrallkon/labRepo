@@ -17,14 +17,14 @@ void main()
 	{
 		BeginDrawing();
 		ClearBackground(Colors.BLACK);
-        DrawLine(0, 400, 800, 400, Colors.GRAY);
+		DrawLine(0, 400, 800, 400, Colors.GRAY);
 
 		p1.drawPlayer();
 		p2.drawPlayer();
-		ball.drawBall(); 
+		ball.drawBall();
 
 		if (IsKeyPressed(KeyboardKey.KEY_R))
-		{ 
+		{
 			reset(p1, p2, ball);
 		}
 
