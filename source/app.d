@@ -36,16 +36,66 @@ void main()
 
 		if (IsKeyDown(KeyboardKey.KEY_D))
 			if (p1.position.x < 800 - p1.radius)
-				p1.position.x += speedFactor;
+			{
+				if (sqrt((p1.position.x - ball.position.x) ^^ 2 + (
+						p1.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p1.position.x += speedFactor;
+				}
+				else
+				{
+					p1.position.x -= 1;
+					// p2.position.y += 1;
+					// p2.position.y -= 1;
+				}
+			}
+
 		if (IsKeyDown(KeyboardKey.KEY_A))
 			if (p1.position.x > 0 + p1.radius)
-				p1.position.x -= speedFactor;
+			{
+				if (sqrt((p1.position.x - ball.position.x) ^^ 2 + (
+						p1.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p1.position.x -= speedFactor;
+				}
+				else
+				{
+					p1.position.x += 1;
+					// p2.position.y += 1;
+					// p2.position.y -= 1;
+				}
+			}
 		if (IsKeyDown(KeyboardKey.KEY_W))
 			if (p1.position.y > 0 + p1.radius)
-				p1.position.y -= speedFactor;
+			{
+				if (sqrt((p1.position.x - ball.position.x) ^^ 2 + (
+						p1.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p1.position.y -= speedFactor;
+				}
+				else
+				{
+					p1.position.y += 1;
+					// p2.position.x += 1;
+					// p2.position.x -= 1;
+
+				}
+			}
 		if (IsKeyDown(KeyboardKey.KEY_S))
 			if (p1.position.y < 400 - p1.radius)
-				p1.position.y += speedFactor;
+			{
+				if (sqrt((p1.position.x - ball.position.x) ^^ 2 + (
+						p1.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p1.position.y += speedFactor;
+				}
+				else
+				{
+					p1.position.y -= 1;
+					// p2.position.x += 1;
+					// p2.position.x -= 1;
+				}
+			}
 
 		if (IsKeyDown(KeyboardKey.KEY_RIGHT))
 			if (p2.position.x < 800 - p2.radius)
@@ -58,7 +108,6 @@ void main()
 				else
 				{
 					p2.position.x -= 1;
-
 					// p2.position.y += 1;
 					// p2.position.y -= 1;
 				}
@@ -75,7 +124,6 @@ void main()
 				else
 				{
 					p2.position.x += 1;
-
 					// p2.position.y += 1;
 					// p2.position.y -= 1;
 				}
@@ -92,7 +140,6 @@ void main()
 				else
 				{
 					p2.position.y += 1;
-
 					// p2.position.x += 1;
 					// p2.position.x -= 1;
 
@@ -111,7 +158,6 @@ void main()
 				else
 				{
 					p2.position.y -= 1;
-
 					// p2.position.x += 1;
 					// p2.position.x -= 1;
 				}
