@@ -19,15 +19,22 @@ void main()
 		BeginDrawing();
 		ClearBackground(Colors.BLACK);
 		DrawLine(0, 400, 800, 400, Colors.GRAY);
+            // void DrawCircleLines(int centerX, int centerY, float radius, Color color);                         // Draw circle outline
+        DrawCircleLines(400, 400, 150, Colors.GRAY);
 
-		DrawLine(250, 1, 550, 1, Colors.WHITE);
-		DrawLine(250, 799, 550, 799, Colors.WHITE);
+		DrawLine(250, 1, 550, 1, Colors.GREEN);
+		DrawLine(250, 799, 550, 799, Colors.GREEN);
+
+            // void DrawRectangleLines(int posX, int posY, int width, int height, Color color);                   // Draw rectangle outline
+        DrawRectangleLines(250, 1, 300, 100, Colors.GRAY);
+        DrawRectangleLines(250, 799, 300, -100, Colors.GRAY);
 
 		p1.drawPlayer();
 		p2.drawPlayer();
 		ball.drawBall();
 
-		DrawText("Player 1 score :", 150, 300, 20, Colors.WHITE); // Draw text (using default font)
+		DrawText(TextFormat("RED:%2i", p1.points), 20, 360, 20, Colors.RED);
+		DrawText(TextFormat("BLUE:%2i", p2.points), 20, 420, 20, Colors.BLUE);
 
 		if (IsKeyPressed(KeyboardKey.KEY_R))
 		{

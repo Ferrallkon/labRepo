@@ -22,7 +22,7 @@ struct Ball
     Vector2 position = {400.0f, 400.0f};
     Vector2 speed = {0.0f, 0.0f};
     float radius = 30;
-    Color color = Colors.GRAY;
+    Color color = Colors.LIGHTGRAY;
 
     void drawBall()
     {
