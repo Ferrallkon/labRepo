@@ -2,6 +2,7 @@ module packages.players;
 import raylib;
 import std.conv;
 import std.stdio;
+import std.math;
 
 struct Player
 {
@@ -17,7 +18,8 @@ struct Player
 
 struct Ball
 {
-    Vector2 position = {400.0f, 400.0f};
+    // Vector2 position = {400.0f, 400.0f};
+    Vector2 position = {600.0f, 600.0f};
     Vector2 speed = {0.0f, 0.0f};
     float radius = 30;
     Color color = Colors.GRAY;
@@ -51,16 +53,18 @@ struct Ball
         }
         position.x += speed.x;
         position.y += speed.y;
-        speed.x *= 0.991;
-        speed.y *= 0.991;
+        // speed.x *= 0.991;
+        // speed.y *= 0.991;
     }
 
     void checkCollisionWithPlayer(Player player)
     {
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
-            speed.x = ((position.x - player.position.x) / 10);
-            speed.y = ((position.y - player.position.y) / 10);
+            {
+                speed.x = ((position.x - player.position.x) / 10);
+                speed.y = ((position.y - player.position.y) / 10);
+            }
         }
     }
 }

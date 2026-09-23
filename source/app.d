@@ -2,6 +2,7 @@ import std.stdio;
 import std.conv;
 import raylib;
 import packages.players;
+import std.math;
 
 void main()
 {
@@ -28,7 +29,7 @@ void main()
 			reset(p1, p2, ball);
 		}
 
-		const speedFactor = 5.0f;
+		const speedFactor = 5;
 
 		if (IsKeyDown(KeyboardKey.KEY_D))
 			if (p1.position.x < 800 - p1.radius)
@@ -45,21 +46,80 @@ void main()
 
 		if (IsKeyDown(KeyboardKey.KEY_RIGHT))
 			if (p2.position.x < 800 - p2.radius)
-				p2.position.x += speedFactor;
+			{
+				if (sqrt((p2.position.x - ball.position.x) ^^ 2 + (
+						p2.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p2.position.x += speedFactor;
+				}
+				else
+				{
+					p2.position.x -= 1;
+
+					// p2.position.y += 1;
+					// p2.position.y -= 1;
+				}
+			}
+
 		if (IsKeyDown(KeyboardKey.KEY_LEFT))
 			if (p2.position.x > 0 + p2.radius)
-				p2.position.x -= speedFactor;
+			{
+				if (sqrt((p2.position.x - ball.position.x) ^^ 2 + (
+						p2.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p2.position.x -= speedFactor;
+				}
+				else
+				{
+					p2.position.x += 1;
+
+					// p2.position.y += 1;
+					// p2.position.y -= 1;
+				}
+			}
+
 		if (IsKeyDown(KeyboardKey.KEY_UP))
 			if (p2.position.y > 400 + p2.radius)
-				p2.position.y -= speedFactor;
+			{
+				if (sqrt((p2.position.x - ball.position.x) ^^ 2 + (
+						p2.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p2.position.y -= speedFactor;
+				}
+				else
+				{
+					p2.position.y += 1;
+
+					// p2.position.x += 1;
+					// p2.position.x -= 1;
+
+				}
+
+			}
+
 		if (IsKeyDown(KeyboardKey.KEY_DOWN))
 			if (p2.position.y < 800 - p2.radius)
-				p2.position.y += speedFactor;
+			{
+				if (sqrt((p2.position.x - ball.position.x) ^^ 2 + (
+						p2.position.y - ball.position.y) ^^ 2) >= 80)
+				{
+					p2.position.y += speedFactor;
+				}
+				else
+				{
+					p2.position.y -= 1;
+
+					// p2.position.x += 1;
+					// p2.position.x -= 1;
+				}
+
+			}
 
 		ball.checkCollisionWithPlayer(p1);
 		ball.checkCollisionWithPlayer(p2);
 		ball.update();
 		EndDrawing();
 	}
+
 	CloseWindow();
 }
