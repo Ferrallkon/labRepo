@@ -4,6 +4,9 @@ import std.conv;
 import std.stdio;
 import std.math;
 
+import core.thread;
+import core.time;
+
 struct Player
 {
     Vector2 position;
@@ -44,28 +47,34 @@ struct Ball
 
         if (position.y >= 800 - radius) //bottom wall
         {
-            if(position.x >= 250 && position.x <= 550){
+            if (position.x >= 250 && position.x <= 550)
+            {
                 p1.position = Vector2(400, 40 + p1.radius);
                 p2.position = Vector2(400, 760 - p2.radius);
                 position = Vector2(400.0f, 600.0f);
                 speed = Vector2(0.0f, 0.0f);
                 p1.points++;
-            } else {
+            }
+            else
+            {
                 position.y = 800 - radius;
                 speed.y *= -1;
             }
         }
         if (position.y <= radius) //top wall
         {
-            if(position.x >= 250 && position.x <= 550){
+            if (position.x >= 250 && position.x <= 550)
+            {
                 p1.position = Vector2(400, 40 + p1.radius);
                 p2.position = Vector2(400, 760 - p2.radius);
                 position = Vector2(400.0f, 200.0f);
                 speed = Vector2(0.0f, 0.0f);
                 p2.points++;
-            } else {
-            position.y = radius;
-            speed.y *= -1;
+            }
+            else
+            {
+                position.y = radius;
+                speed.y *= -1;
             }
         }
         position += speed;
@@ -78,6 +87,19 @@ struct Ball
         {
             {
                 speed = ((position - player.position) / 5);
+
+                if (player.radius == 50)
+                {
+                    player.radius += 10;
+                }
+                auto t = new Thread({
+                    Thread.sleep(100.msecs);
+                    if (player.radius == 60)
+                    {
+                        player.radius -= 10;
+                    }
+
+                }).start();
             }
         }
     }
