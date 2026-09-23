@@ -20,6 +20,9 @@ void main()
 		ClearBackground(Colors.BLACK);
 		DrawLine(0, 400, 800, 400, Colors.GRAY);
 
+		DrawLine(300, 1, 500, 1, Colors.WHITE);
+		DrawLine(300, 799, 500, 799, Colors.WHITE);
+
 		p1.drawPlayer();
 		p2.drawPlayer();
 		ball.drawBall();
@@ -29,7 +32,7 @@ void main()
 			reset(p1, p2, ball);
 		}
 
-		const speedFactor = 5;
+		const speedFactor = 7;
 
 		if (IsKeyDown(KeyboardKey.KEY_D))
 			if (p1.position.x < 800 - p1.radius)
@@ -117,7 +120,7 @@ void main()
 
 		ball.checkCollisionWithPlayer(p1);
 		ball.checkCollisionWithPlayer(p2);
-		ball.update();
+		ball.update(p1, p1);
 		EndDrawing();
 	}
 

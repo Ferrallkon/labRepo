@@ -29,7 +29,7 @@ struct Ball
         DrawCircle(position.x.to!int, position.y.to!int, radius, color);
     }
 
-    void update()
+    void update(Player p1, Player p2)
     {
         if (position.x >= 800 - radius) // right wall
         {
@@ -41,20 +41,36 @@ struct Ball
             position.x = radius;
             speed.x *= -1;
         }
+
+
         if (position.y >= 800 - radius) //bottom wall
         {
-            position.y = 800 - radius;
-            speed.y *= -1;
+            if(position.x >= 300 && position.x <= 500){
+                p1.position = Vector2(50, 50);
+                p2.position = Vector2(750, 750);
+                position = Vector2(400.0f, 600.0f);
+                speed = Vector2(0.0f, 0.0f);
+            } else {
+                position.y = 800 - radius;
+                speed.y *= -1;
+            }
         }
         if (position.y <= radius) //top wall
         {
+            if(position.x >= 300 && position.x <= 500){
+                p1.position = Vector2(50, 50);
+                p2.position = Vector2(750, 750);
+                position = Vector2(400.0f, 200.0f);
+                speed = Vector2(0.0f, 0.0f);
+            } else {
             position.y = radius;
             speed.y *= -1;
+            }
         }
         position.x += speed.x;
         position.y += speed.y;
-        // speed.x *= 0.991;
-        // speed.y *= 0.991;
+        speed.x *= 0.991;
+        speed.y *= 0.991;
     }
 
     void checkCollisionWithPlayer(Player player)
@@ -62,8 +78,8 @@ struct Ball
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
             {
-                speed.x = ((position.x - player.position.x) / 10);
-                speed.y = ((position.y - player.position.y) / 10);
+                speed.x = ((position.x - player.position.x) / 5);
+                speed.y = ((position.y - player.position.y) / 5);
             }
         }
     }
