@@ -67,19 +67,16 @@ struct Ball
             speed.y *= -1;
             }
         }
-        position.x += speed.x;
-        position.y += speed.y;
-        speed.x *= 0.991;
-        speed.y *= 0.991;
+        position += speed;
+        speed *= 0.991;
     }
 
-    void checkCollisionWithPlayer(Player player)
+    void checkCollisionWithPlayer(ref Player player)
     {
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
             {
-                speed.x = ((position.x - player.position.x) / 5);
-                speed.y = ((position.y - player.position.y) / 5);
+                speed = ((position - player.position) / 5);
             }
         }
     }
