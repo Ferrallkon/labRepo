@@ -27,8 +27,7 @@ void main()
 		p2.drawPlayer();
 		ball.drawBall();
 
-        DrawText("Player 1 score :", 150, 300, 20, Colors.WHITE);       // Draw text (using default font)
-
+		DrawText("Player 1 score :", 150, 300, 20, Colors.WHITE); // Draw text (using default font)
 
 		if (IsKeyPressed(KeyboardKey.KEY_R))
 		{
@@ -47,9 +46,14 @@ void main()
 				}
 				else
 				{
-					p1.position.x -= 1;
-					// p2.position.y += 1;
-					// p2.position.y -= 1;
+					if ((p1.position - ball.position).y > 0)
+					{
+						p1.position.y += 1;
+					}
+					else
+					{
+						p1.position.y -= 1;
+					}
 				}
 			}
 
@@ -63,11 +67,17 @@ void main()
 				}
 				else
 				{
-					p1.position.x += 1;
-					// p2.position.y += 1;
-					// p2.position.y -= 1;
+					if ((p1.position - ball.position).y > 0)
+					{
+						p1.position.y += 1;
+					}
+					else
+					{
+						p1.position.y -= 1;
+					}
 				}
 			}
+
 		if (IsKeyDown(KeyboardKey.KEY_W))
 			if (p1.position.y > 0 + p1.radius)
 			{
@@ -78,10 +88,14 @@ void main()
 				}
 				else
 				{
-					p1.position.y += 1;
-					// p2.position.x += 1;
-					// p2.position.x -= 1;
-
+					if ((p1.position - ball.position).x > 0)
+					{
+						p1.position.x += 1;
+					}
+					else
+					{
+						p1.position.x -= 1;
+					}
 				}
 			}
 		if (IsKeyDown(KeyboardKey.KEY_S))
@@ -95,8 +109,6 @@ void main()
 				else
 				{
 					p1.position.y -= 1;
-					// p2.position.x += 1;
-					// p2.position.x -= 1;
 				}
 			}
 
@@ -111,8 +123,14 @@ void main()
 				else
 				{
 					p2.position.x -= 1;
-					// p2.position.y += 1;
-					// p2.position.y -= 1;
+					if ((p2.position - ball.position).y > 0)
+					{
+						p2.position.y += 1;
+					}
+					else
+					{
+						p2.position.y -= 1;
+					}
 				}
 			}
 
@@ -127,8 +145,14 @@ void main()
 				else
 				{
 					p2.position.x += 1;
-					// p2.position.y += 1;
-					// p2.position.y -= 1;
+					if ((p2.position - ball.position).y > 0)
+					{
+						p2.position.y += 1;
+					}
+					else
+					{
+						p2.position.y -= 1;
+					}
 				}
 			}
 
@@ -143,11 +167,16 @@ void main()
 				else
 				{
 					p2.position.y += 1;
-					// p2.position.x += 1;
-					// p2.position.x -= 1;
 
+					if ((p2.position - ball.position).x > 0)
+					{
+						p2.position.x += 1;
+					}
+					else
+					{
+						p2.position.x -= 1;
+					}
 				}
-
 			}
 
 		if (IsKeyDown(KeyboardKey.KEY_DOWN))
@@ -161,10 +190,15 @@ void main()
 				else
 				{
 					p2.position.y -= 1;
-					// p2.position.x += 1;
-					// p2.position.x -= 1;
+					if ((p2.position - ball.position).x > 0)
+					{
+						p2.position.x += 1;
+					}
+					else
+					{
+						p2.position.x -= 1;
+					}
 				}
-
 			}
 
 		ball.checkCollisionWithPlayer(p1);
