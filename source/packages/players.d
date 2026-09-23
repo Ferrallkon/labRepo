@@ -9,6 +9,7 @@ struct Player
     Vector2 position;
     Color color;
     float radius = 50;
+    int points = 0;
 
     void drawPlayer()
     {
@@ -18,8 +19,7 @@ struct Player
 
 struct Ball
 {
-    // Vector2 position = {400.0f, 400.0f};
-    Vector2 position = {600.0f, 600.0f};
+    Vector2 position = {400.0f, 400.0f};
     Vector2 speed = {0.0f, 0.0f};
     float radius = 30;
     Color color = Colors.GRAY;
@@ -29,7 +29,7 @@ struct Ball
         DrawCircle(position.x.to!int, position.y.to!int, radius, color);
     }
 
-    void update(Player p1, Player p2)
+    void update(ref Player p1, ref Player p2)
     {
         if (position.x >= 800 - radius) // right wall
         {
@@ -42,14 +42,14 @@ struct Ball
             speed.x *= -1;
         }
 
-
         if (position.y >= 800 - radius) //bottom wall
         {
-            if(position.x >= 300 && position.x <= 500){
-                p1.position = Vector2(50, 50);
-                p2.position = Vector2(750, 750);
+            if(position.x >= 250 && position.x <= 550){
+                p1.position = Vector2(400, 40 + p1.radius);
+                p2.position = Vector2(400, 760 - p2.radius);
                 position = Vector2(400.0f, 600.0f);
                 speed = Vector2(0.0f, 0.0f);
+                p1.points++;
             } else {
                 position.y = 800 - radius;
                 speed.y *= -1;
@@ -57,11 +57,12 @@ struct Ball
         }
         if (position.y <= radius) //top wall
         {
-            if(position.x >= 300 && position.x <= 500){
-                p1.position = Vector2(50, 50);
-                p2.position = Vector2(750, 750);
+            if(position.x >= 250 && position.x <= 550){
+                p1.position = Vector2(400, 40 + p1.radius);
+                p2.position = Vector2(400, 760 - p2.radius);
                 position = Vector2(400.0f, 200.0f);
                 speed = Vector2(0.0f, 0.0f);
+                p2.points++;
             } else {
             position.y = radius;
             speed.y *= -1;
@@ -84,8 +85,8 @@ struct Ball
 
 void reset(ref Player p1, ref Player p2, ref Ball ball)
 {
-    p1.position = Vector2(50, 50);
-    p2.position = Vector2(750, 750);
+    p1.position = Vector2(400, 90);
+    p2.position = Vector2(400, 710);
     ball.position = Vector2(400.0f, 400.0f);
     ball.speed = Vector2(0.0f, 0.0f);
 }

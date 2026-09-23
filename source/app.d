@@ -6,8 +6,8 @@ import std.math;
 
 void main()
 {
-	auto p1 = Player(Vector2(50, 50), Colors.RED);
-	auto p2 = Player(Vector2(750, 750), Colors.BLUE);
+	auto p1 = Player(Vector2(400, 90), Colors.RED);
+	auto p2 = Player(Vector2(400, 710), Colors.BLUE);
 	auto ball = Ball();
 
 	validateRaylibBinding();
@@ -20,12 +20,15 @@ void main()
 		ClearBackground(Colors.BLACK);
 		DrawLine(0, 400, 800, 400, Colors.GRAY);
 
-		DrawLine(300, 1, 500, 1, Colors.WHITE);
-		DrawLine(300, 799, 500, 799, Colors.WHITE);
+		DrawLine(250, 1, 550, 1, Colors.WHITE);
+		DrawLine(250, 799, 550, 799, Colors.WHITE);
 
 		p1.drawPlayer();
 		p2.drawPlayer();
 		ball.drawBall();
+
+        DrawText("Player 1 score :", 150, 300, 20, Colors.WHITE);       // Draw text (using default font)
+
 
 		if (IsKeyPressed(KeyboardKey.KEY_R))
 		{
@@ -166,7 +169,7 @@ void main()
 
 		ball.checkCollisionWithPlayer(p1);
 		ball.checkCollisionWithPlayer(p2);
-		ball.update(p1, p1);
+		ball.update(p1, p2);
 		EndDrawing();
 	}
 
