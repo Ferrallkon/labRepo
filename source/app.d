@@ -36,14 +36,19 @@ void main()
 
         if (ball.isPlaying == 0)
         {
+            // void DrawRectangle(int posX, int posY, int width, int height, Color color);
+            DrawRectangle(0, 360, 800, 100, Colors.GRAY);
+
             DrawText("PRESS SPACE TO START", 200, 380, 30, Colors.WHITE);
             DrawText("PRESS 'C' FOR SINGLE PLAYER", 200, 410, 30, Colors.WHITE);
             if (IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
+                reset(p1, p2, ball);
                 ball.isPlaying = 1;
             }
             if (IsKeyPressed(KeyboardKey.KEY_C))
             {
+                reset(p1, p2, ball);
                 ball.isPlaying = 2;
             }
 
@@ -111,9 +116,7 @@ void main()
             {
                 ball.isPlaying = 0;
             }
-
         }
-
         EndDrawing();
     }
     CloseWindow();
