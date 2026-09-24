@@ -3,7 +3,6 @@ import raylib;
 import std.conv;
 import std.stdio;
 import std.math;
-
 import core.thread;
 import core.time;
 
@@ -11,21 +10,107 @@ struct Player
 {
     Vector2 position;
     Color color;
-    float radius = 50;
+
+    int radius = 50;
     int points = 0;
+
+    const speedFactor = 7.5;
 
     void drawPlayer()
     {
         DrawCircle(position.x.to!int, position.y.to!int, radius, color);
+        DrawCircle(position.x.to!int, position.y.to!int, radius / 2, Colors.BLACK);
+    }
+
+    void movePlayer(KeyboardKey key, Ball ball)
+    {
+        if (key == KeyboardKey.KEY_RIGHT || key == KeyboardKey.KEY_D)
+            position.x += speedFactor;
+        if (key == KeyboardKey.KEY_LEFT || key == KeyboardKey.KEY_A)
+            position.x -= speedFactor;
+        if (key == KeyboardKey.KEY_UP || key == KeyboardKey.KEY_W)
+            position.y -= speedFactor;
+        if (key == KeyboardKey.KEY_DOWN || key == KeyboardKey.KEY_S)
+            position.y += speedFactor;
+
+        fitInsideBoundaries(key);
+
+        avoidBallOverlap(key, ball);
+    }
+
+    void fitInsideBoundaries(KeyboardKey key)
+    {
+        if (position.x >= 800 - radius) // right wall
+            position.x = 800 - radius;
+
+        if (position.x <= radius) // left wall
+            position.x = radius;
+
+        if (key == KeyboardKey.KEY_S)
+            if (position.y >= 400 - radius) // middle wall
+                position.y = 400 - radius;
+
+        if (key == KeyboardKey.KEY_UP)
+            if (position.y <= 400 + radius) // middle wall
+                position.y = 400 + radius;
+
+        if (position.y >= 800 - radius) // bottom wall
+            position.y = 800 - radius;
+
+        if (position.y <= radius) // top wall
+            position.y = radius;
+    }
+
+    void avoidBallOverlap(KeyboardKey key, Ball ball)
+    {
+        if (CheckCollisionCircles(position, radius - speedFactor, ball.position, ball.radius))
+        {
+            if (key == KeyboardKey.KEY_RIGHT || key == KeyboardKey.KEY_D)
+            {
+                position.x -= speedFactor;
+                // (position - ball.position).y > 0 ? (position.y += 1) : (position.y -= 1);
+            }
+            if (key == KeyboardKey.KEY_LEFT || key == KeyboardKey.KEY_A)
+            {
+                position.x += speedFactor;
+                // (position - ball.position).y > 0 ? (position.y += 1) : (position.y -= 1);
+            }
+            if (key == KeyboardKey.KEY_UP || key == KeyboardKey.KEY_W)
+            {
+                position.y += speedFactor;
+                // (position - ball.position).x > 0 ? (position.x += 1) : (position.x -= 1);
+            }
+            if (key == KeyboardKey.KEY_DOWN || key == KeyboardKey.KEY_S)
+            {
+                position.y -= speedFactor;
+                // (position - ball.position).x > 0 ? (position.x += 1) : (position.x -= 1);
+            }
+        }
+    }
+
+    void kickAnimation()
+    {
+        const sizeFactor = 10;
+
+        if (radius == Player.init.radius)
+            radius += sizeFactor;
+
+        new Thread({
+            Thread.sleep(150.msecs);
+            if (radius == Player.init.radius + sizeFactor)
+                radius -= sizeFactor;
+        }).start();
     }
 }
 
 struct Ball
 {
-    Vector2 position = {400.0f, 400.0f};
-    Vector2 speed = {0.0f, 0.0f};
-    float radius = 30;
+    Vector2 position = {400, 400};
+    Vector2 speed = {0, 0};
+
     Color color = Colors.LIGHTGRAY;
+
+    int radius = 30;
 
     void drawBall()
     {
@@ -88,18 +173,7 @@ struct Ball
             {
                 speed = ((position - player.position) / 5);
 
-                if (player.radius == 50)
-                {
-                    player.radius += 10;
-                }
-                auto t = new Thread({
-                    Thread.sleep(100.msecs);
-                    if (player.radius == 60)
-                    {
-                        player.radius -= 10;
-                    }
-
-                }).start();
+                player.kickAnimation();
             }
         }
     }
