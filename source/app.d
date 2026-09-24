@@ -40,7 +40,7 @@ void main()
             DrawRectangle(0, 360, 800, 100, Colors.GRAY);
 
             DrawText("PRESS SPACE TO START", 200, 380, 30, Colors.WHITE);
-            DrawText("PRESS 'C' FOR SINGLE PLAYER", 200, 410, 30, Colors.WHITE);
+            DrawText("PRESS 'C' FOR SINGLE PLAYER", 150, 410, 30, Colors.WHITE);
             if (IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 reset(p1, p2, ball);
@@ -54,18 +54,23 @@ void main()
 
             if (p1.points == 5)
             {
-                DrawText("RED WINS", 275, 320, 50, Colors.RED);
+                DrawText("RED WINS", 275, 310, 50, Colors.RED);
             }
 
             if (p2.points == 5)
             {
-                DrawText("BLUE WINS", 260, 320, 50, Colors.BLUE);
+                DrawText("BLUE WINS", 260, 310, 50, Colors.BLUE);
             }
         }
         else if (ball.isPlaying == 1)
         {
             if (IsKeyPressed(KeyboardKey.KEY_R))
                 reset(p1, p2, ball);
+            if (IsKeyPressed(KeyboardKey.KEY_P)){
+                p2.speedFactor = 15;
+                p1.speedFactor = 15;
+                ball.radius = 10;
+            }
 
             if (IsKeyDown(KeyboardKey.KEY_D))
                 p1.movePlayer(KeyboardKey.KEY_D, ball);
@@ -96,6 +101,47 @@ void main()
         }
         else if (ball.isPlaying == 2)
         {
+            Vector2 target;
+            if (ball.position.y < 400) // if ball is on p1's half
+            {
+                target = ball.position; // move keys direct p1 to target if positions dont equal 
+            }
+            else
+            {
+                target = Vector2(ball.position.x, 160); // if on the other half, match up x axis but stay at designated y axis
+            }
+
+            int horizontalBuffer = 70; // make tracking less precise to simulate variation hitting
+            int verticalBuffer = 50; 
+
+            p1.speedFactor = 3.5; // too hard nerf player 1 speed
+
+            if (target.x < 100){ // gets stuck on edges of x axis
+                target.x = 100;
+            }
+            else if (target.x > 700){
+                target.x = 700;
+            }
+
+            if (target.x > p1.position.x + horizontalBuffer)
+            {
+                p1.movePlayer(KeyboardKey.KEY_D, ball);
+            }
+
+            if (target.x < p1.position.x - horizontalBuffer)
+            {
+                p1.movePlayer(KeyboardKey.KEY_A, ball);
+            }
+
+            if (target.y > p1.position.y + verticalBuffer)
+            {
+                p1.movePlayer(KeyboardKey.KEY_S, ball);
+            }
+            if (target.y < p1.position.y - verticalBuffer)
+            {
+                p1.movePlayer(KeyboardKey.KEY_W, ball);
+            }
+
             if (IsKeyPressed(KeyboardKey.KEY_R))
                 reset(p1, p2, ball);
 

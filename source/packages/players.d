@@ -14,7 +14,7 @@ struct Player
     int radius = 50;
     int points = 0;
 
-    const speedFactor = 7.5;
+    double speedFactor = 7.5;
 
     void drawPlayer()
     {
@@ -181,6 +181,7 @@ void reset(ref Player p1, ref Player p2, ref Ball ball)
 {
     p1.position = Vector2(400, 90);
     p2.position = Vector2(400, 710);
+    p1.speedFactor = 7.5;
     p1.points = 0;
     p2.points = 0;
     ball.position = Vector2(400.0f, 400.0f);
