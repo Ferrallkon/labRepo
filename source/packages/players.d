@@ -108,6 +108,7 @@ struct Ball
     Color color = Colors.LIGHTGRAY;
 
     int radius = 30;
+    int isPlaying = 0; // 0 - menu screen, 1 - game start, 2 - vs computer mode
 
     void drawBall()
     {
@@ -126,7 +127,6 @@ struct Ball
             position.x = radius;
             speed.x *= -1;
         }
-
         if (position.y >= 800 - radius) //bottom wall
         {
             if (position.x >= 250 && position.x <= 550)
@@ -185,4 +185,5 @@ void reset(ref Player p1, ref Player p2, ref Ball ball)
     p2.points = 0;
     ball.position = Vector2(400.0f, 400.0f);
     ball.speed = Vector2(0.0f, 0.0f);
+    ball.isPlaying = 0;
 }

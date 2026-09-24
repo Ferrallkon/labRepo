@@ -14,8 +14,6 @@ void main()
     InitWindow(800, 800, "Game");
     SetTargetFPS(60);
 
-    bool isPlaying = false;
-
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -33,16 +31,20 @@ void main()
         p2.drawPlayer(); //blue player
         ball.drawBall();
 
-        DrawText(TextFormat("RED:%2i", p1.points), 20, 360, 20, Colors.RED); // Score keeping text, middle left
-        DrawText(TextFormat("BLUE:%2i", p2.points), 20, 420, 20, Colors.BLUE);
+        DrawText(TextFormat("RED:%2i", p1.points), 20, 360, 30, Colors.RED); // Score keeping text, middle left
+        DrawText(TextFormat("BLUE:%2i", p2.points), 20, 410, 30, Colors.BLUE);
 
-        if (!isPlaying)
+        if (ball.isPlaying == 0)
         {
             DrawText("PRESS SPACE TO START", 200, 380, 30, Colors.WHITE);
+            DrawText("PRESS 'C' FOR SINGLE PLAYER", 200, 410, 30, Colors.WHITE);
             if (IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
-                reset(p1, p2, ball);
-                isPlaying = true;
+                ball.isPlaying = 1;
+            }
+            if (IsKeyPressed(KeyboardKey.KEY_C))
+            {
+                ball.isPlaying = 2;
             }
 
             if (p1.points == 5)
@@ -52,11 +54,10 @@ void main()
 
             if (p2.points == 5)
             {
-                DrawText("BLUE WINS", 275, 320, 50, Colors.BLUE);
+                DrawText("BLUE WINS", 260, 320, 50, Colors.BLUE);
             }
-
         }
-        else
+        else if (ball.isPlaying == 1)
         {
             if (IsKeyPressed(KeyboardKey.KEY_R))
                 reset(p1, p2, ball);
@@ -85,9 +86,34 @@ void main()
 
             if (p1.points == 5 || p2.points == 5)
             {
-                isPlaying = false;
+                ball.isPlaying = 0;
             }
         }
+        else if (ball.isPlaying == 2)
+        {
+            if (IsKeyPressed(KeyboardKey.KEY_R))
+                reset(p1, p2, ball);
+
+            if (IsKeyDown(KeyboardKey.KEY_RIGHT))
+                p2.movePlayer(KeyboardKey.KEY_RIGHT, ball);
+            if (IsKeyDown(KeyboardKey.KEY_LEFT))
+                p2.movePlayer(KeyboardKey.KEY_LEFT, ball);
+            if (IsKeyDown(KeyboardKey.KEY_UP))
+                p2.movePlayer(KeyboardKey.KEY_UP, ball);
+            if (IsKeyDown(KeyboardKey.KEY_DOWN))
+                p2.movePlayer(KeyboardKey.KEY_DOWN, ball);
+
+            ball.checkCollisionWithPlayer(p1);
+            ball.checkCollisionWithPlayer(p2);
+            ball.update(p1, p2);
+
+            if (p1.points == 5 || p2.points == 5)
+            {
+                ball.isPlaying = 0;
+            }
+
+        }
+
         EndDrawing();
     }
     CloseWindow();
