@@ -88,18 +88,15 @@ struct Player
         }
     }
 
-    void kickAnimation()
+    void kickAnimation(bool ballkicked)
     {
         const sizeFactor = 10;
 
-        if (radius == Player.init.radius)
-            radius += sizeFactor;
+        if (radius != Player.init.radius)
+            radius--;
 
-        new Thread({
-            Thread.sleep(150.msecs);
-            if (radius == Player.init.radius + sizeFactor)
-                radius -= sizeFactor;
-        }).start();
+        if (radius == Player.init.radius && ballkicked)
+            radius += sizeFactor;
     }
 }
 
@@ -168,14 +165,15 @@ struct Ball
 
     void checkCollisionWithPlayer(ref Player player)
     {
+        bool ballkicked;
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
             {
                 speed = ((position - player.position) / 5);
-
-                player.kickAnimation();
+                ballkicked = true;
             }
         }
+        player.kickAnimation(ballkicked);
     }
 }
 
