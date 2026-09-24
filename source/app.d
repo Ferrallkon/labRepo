@@ -18,22 +18,20 @@ void main()
 	{
 		BeginDrawing();
 		ClearBackground(Colors.BLACK);
-		DrawLine(0, 400, 800, 400, Colors.GRAY);
-            // void DrawCircleLines(int centerX, int centerY, float radius, Color color);                         // Draw circle outline
+		DrawLine(0, 400, 800, 400, Colors.GRAY); //Midpoint line and circle
         DrawCircleLines(400, 400, 150, Colors.GRAY);
 
-		DrawLine(250, 1, 550, 1, Colors.GREEN);
-		DrawLine(250, 799, 550, 799, Colors.GREEN);
+		DrawLine(250, 1, 550, 1, Colors.GREEN); //Top goal line and box
+        DrawRectangleLines(250, 1, 300, 90, Colors.GRAY);
 
-            // void DrawRectangleLines(int posX, int posY, int width, int height, Color color);                   // Draw rectangle outline
-        DrawRectangleLines(250, 1, 300, 100, Colors.GRAY);
-        DrawRectangleLines(250, 799, 300, -100, Colors.GRAY);
+		DrawLine(250, 799, 550, 799, Colors.GREEN); //Bottom goal line and box
+        DrawRectangleLines(250, 799, 300, -90, Colors.GRAY);
 
-		p1.drawPlayer();
-		p2.drawPlayer();
+		p1.drawPlayer(); //red player
+		p2.drawPlayer(); //blue player
 		ball.drawBall();
 
-		DrawText(TextFormat("RED:%2i", p1.points), 20, 360, 20, Colors.RED);
+		DrawText(TextFormat("RED:%2i", p1.points), 20, 360, 20, Colors.RED); // Score keeping text, middle left
 		DrawText(TextFormat("BLUE:%2i", p2.points), 20, 420, 20, Colors.BLUE);
 
 		if (IsKeyPressed(KeyboardKey.KEY_R))
