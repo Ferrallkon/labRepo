@@ -22,7 +22,7 @@ struct Player
         DrawCircle(position.x.to!int, position.y.to!int, radius / 2, Colors.BLACK);
     }
 
-    void movePlayer(KeyboardKey key, Ball ball)
+    void movePlayer(KeyboardKey key, ref Ball ball)
     {
         if (key == KeyboardKey.KEY_RIGHT || key == KeyboardKey.KEY_D)
             position.x += speedFactor;
@@ -136,7 +136,7 @@ struct Ball
             {
                 p1.position = Vector2(400, 40 + p1.radius);
                 p2.position = Vector2(400, 760 - p2.radius);
-                position = Vector2(400.0f, 600.0f);
+                position = Vector2(400.0f, 550.0f);
                 speed = Vector2(0.0f, 0.0f);
                 p1.points++;
             }
@@ -152,7 +152,7 @@ struct Ball
             {
                 p1.position = Vector2(400, 40 + p1.radius);
                 p2.position = Vector2(400, 760 - p2.radius);
-                position = Vector2(400.0f, 200.0f);
+                position = Vector2(400.0f, 250.0f);
                 speed = Vector2(0.0f, 0.0f);
                 p2.points++;
             }
