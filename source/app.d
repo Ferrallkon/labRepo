@@ -16,8 +16,11 @@ void main()
     InitWindow(800, 800, "Game");
     SetTargetFPS(60);
 
-    InitAudioDevice(); // Initialize audio device
-    Sound fxKick = LoadSound("kick.wav");
+    InitAudioDevice();
+    Sound fxKick = LoadSound("source/sounds/kick.wav");
+    Sound fxBounce = LoadSound("source/sounds/bounce.wav");
+    Sound fxGoal = LoadSound("source/sounds/goal.wav");
+    Sound fxWow = LoadSound("source/sounds/wow.wav");
 
     while (!WindowShouldClose())
     {
@@ -25,9 +28,9 @@ void main()
         ClearBackground(Colors.BLACK);
         DrawLine(0, 400, 800, 400, Colors.GRAY); // Midpoint line and circle
         DrawCircleLines(400, 400, 150, Colors.GRAY);
-        DrawLine(250, 1, 550, 1, Colors.GREEN); // Top goal line and box
+        DrawLine(250, 1, 550, 1, Colors.WHITE); // Top goal line and box
         DrawRectangleLines(250, 1, 300, 90, Colors.GRAY);
-        DrawLine(250, 799, 550, 799, Colors.GREEN); // Bottom goal line and box
+        DrawLine(250, 799, 550, 799, Colors.WHITE); // Bottom goal line and box
         DrawRectangleLines(250, 799, 300, -90, Colors.GRAY);
         p1.drawPlayer(); // Red player
         p2.drawPlayer(); // Blue player
@@ -124,19 +127,37 @@ void main()
                     p1.movePlayer(KeyboardKey.KEY_W, ball);
             }
 
-            if (ball.checkCollisionWithPlayer(p1))
-                PlaySound(fxKick);
-            if (ball.checkCollisionWithPlayer(p2))
-                PlaySound(fxKick);
-            ball.update(p1, p2);
+            if (ball.checkCollisionWithPlayer(p1) ||
+                ball.checkCollisionWithPlayer(p2))
+                if (!IsSoundPlaying(fxKick))
+                    PlaySound(fxKick);
+
+            int bounce = ball.update(p1, p2);
+
+            if (bounce == 1)
+            {
+                if (!IsSoundPlaying(fxBounce))
+                    PlaySound(fxBounce);
+            }
+            else if (bounce == 2)
+            {
+                if (p1.points != 3 && p2.points != 3)
+                    PlaySound(fxGoal);
+            }
 
             if (p1.points == 3 || p2.points == 3)
+            {
+                PlaySound(fxWow);
                 ball.isPlaying = 0;
+            }
         }
         EndDrawing();
     }
 
     UnloadSound(fxKick);
+    UnloadSound(fxBounce);
+    UnloadSound(fxGoal);
+    UnloadSound(fxWow);
     CloseAudioDevice();
     CloseWindow();
 }

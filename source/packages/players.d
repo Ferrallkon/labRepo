@@ -99,17 +99,20 @@ struct Ball
         DrawCircle(position.x.to!int, position.y.to!int, radius, color);
     }
 
-    void update(ref Player p1, ref Player p2)
+    int update(ref Player p1, ref Player p2)
     {
+        int bounce; // 1 bounce, 2 goal
         if (position.x >= 800 - radius) // right wall
         {
             position.x = 800 - radius; // bring it back in bounds if it is out of bounds
             speed.x *= -1;
+            bounce = 1;
         }
         if (position.x <= radius) //left wall
         {
             position.x = radius;
             speed.x *= -1;
+            bounce = 1;
         }
         if (position.y >= 800 - radius) //bottom wall
         {
@@ -120,11 +123,13 @@ struct Ball
                 position = Vector2(400, 550);
                 speed = Vector2(0, 0);
                 p1.points++;
+                bounce = 2;
             }
             else
             {
                 position.y = 800 - radius;
                 speed.y *= -1;
+                bounce = 1;
             }
         }
         if (position.y <= radius) //top wall
@@ -136,15 +141,19 @@ struct Ball
                 position = Vector2(400, 250);
                 speed = Vector2(0, 0);
                 p2.points++;
+                bounce = 2;
             }
             else
             {
                 position.y = radius;
                 speed.y *= -1;
+                bounce = 1;
             }
         }
         position += speed;
         speed *= 0.991;
+
+        return bounce;
     }
 
     bool checkCollisionWithPlayer(ref Player player)
