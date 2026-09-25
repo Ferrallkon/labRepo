@@ -147,7 +147,7 @@ struct Ball
         speed *= 0.991;
     }
 
-    void checkCollisionWithPlayer(ref Player player)
+    bool checkCollisionWithPlayer(ref Player player)
     {
         bool ballkicked;
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
@@ -158,6 +158,7 @@ struct Ball
             }
         }
         player.kickAnimation(ballkicked);
+        return ballkicked;
     }
 }
 

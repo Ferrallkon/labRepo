@@ -16,6 +16,9 @@ void main()
     InitWindow(800, 800, "Game");
     SetTargetFPS(60);
 
+    InitAudioDevice(); // Initialize audio device
+    Sound fxKick = LoadSound("kick.wav");
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -29,6 +32,9 @@ void main()
         p1.drawPlayer(); // Red player
         p2.drawPlayer(); // Blue player
         ball.drawBall();
+
+        if (IsKeyPressed(KeyboardKey.KEY_R))
+            reset(p1, p2, ball);
 
         DrawText(TextFormat("RED:%2i", p1.points), 20, 360, 30, Colors.RED); // Score keeping text, middle left
         DrawText(TextFormat("BLUE:%2i", p2.points), 20, 410, 30, Colors.BLUE);
@@ -60,9 +66,6 @@ void main()
         }
         else
         {
-            if (IsKeyPressed(KeyboardKey.KEY_R))
-                reset(p1, p2, ball);
-
             if (IsKeyPressed(KeyboardKey.KEY_P))
             {
                 p2.speedFactor = 15;
@@ -121,8 +124,10 @@ void main()
                     p1.movePlayer(KeyboardKey.KEY_W, ball);
             }
 
-            ball.checkCollisionWithPlayer(p1);
-            ball.checkCollisionWithPlayer(p2);
+            if (ball.checkCollisionWithPlayer(p1))
+                PlaySound(fxKick);
+            if (ball.checkCollisionWithPlayer(p2))
+                PlaySound(fxKick);
             ball.update(p1, p2);
 
             if (p1.points == 3 || p2.points == 3)
@@ -131,5 +136,7 @@ void main()
         EndDrawing();
     }
 
+    UnloadSound(fxKick);
+    CloseAudioDevice();
     CloseWindow();
 }
