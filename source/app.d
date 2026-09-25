@@ -62,21 +62,13 @@ void main()
                 DrawText("RED WINS", 275, 310, 50, Colors.RED);
             if (p2.points == 3)
                 DrawText("BLUE WINS", 260, 310, 50, Colors.BLUE);
-
         }
         else
         {
-<<<<<<< HEAD
             if (IsKeyPressed(KeyboardKey.KEY_R))
                 reset(p1, p2, ball);
-=======
             if (IsKeyPressed(KeyboardKey.KEY_P))
-            {
-                p2.speedFactor = 15;
-                p1.speedFactor = 15;
-                ball.radius = 10;
-            }
->>>>>>> 63294f9c267a6b541a4e43b94dfb9e50b2e61a04
+                hardMode(p1, p2, ball);
 
             if (IsKeyDown(KeyboardKey.KEY_RIGHT))
                 p2.movePlayer(KeyboardKey.KEY_RIGHT, ball);
@@ -89,7 +81,6 @@ void main()
 
             if (ball.isPlaying == 1) // 2 PLAYERS MODE
             {
-
                 if (IsKeyDown(KeyboardKey.KEY_D))
                     p1.movePlayer(KeyboardKey.KEY_D, ball);
                 if (IsKeyDown(KeyboardKey.KEY_A))
@@ -101,7 +92,6 @@ void main()
             }
             else // ball.isPlaying == 2 // SINGLE PLAYER MODE
             {
-
                 Vector2 target;
 
                 if (ball.position.y < 400) // if ball is on p1's half
@@ -109,7 +99,7 @@ void main()
                 else
                     target = Vector2(ball.position.x, 160); // if on the other half, match up x axis but stay at designated y axis
 
-                p1.speedFactor = 3.5; // too hard nerf player 1 speed
+                p1.speedFactor = 4.5; // too hard nerf player 1 speed
 
                 if (target.x < 100) // gets stuck on edges of x axis
                     target.x = 100;
@@ -128,7 +118,6 @@ void main()
                 if (target.y < p1.position.y - verticalBuffer)
                     p1.movePlayer(KeyboardKey.KEY_W, ball);
             }
-
             if (ball.checkCollisionWithPlayer(p1))
                 PlaySound(fxKick);
             if (ball.checkCollisionWithPlayer(p2))
@@ -140,7 +129,6 @@ void main()
         }
         EndDrawing();
     }
-
     UnloadSound(fxKick);
     CloseAudioDevice();
     CloseWindow();

@@ -93,6 +93,7 @@ struct Ball
     Color color = Colors.LIGHTGRAY;
     int radius = 30;
     int isPlaying = 0; // 0 - menu screen, 1 - game start, 2 - vs computer mode
+    double speedFactor = 5;
 
     void drawBall()
     {
@@ -153,7 +154,7 @@ struct Ball
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
         {
             {
-                speed = ((position - player.position) / 5);
+                speed = ((position - player.position) / speedFactor);
                 ballkicked = true;
             }
         }
@@ -167,4 +168,13 @@ void reset(ref Player p1, ref Player p2, ref Ball ball)
     p1 = Player(Vector2(400, 90), Colors.RED, 50, 0, 7.5);
     p2 = Player(Vector2(400, 710), Colors.BLUE, 50, 0, 7.5);
     ball = Ball(Vector2(400, 400), Vector2(0, 0), Colors.LIGHTGRAY, 30, 0);
+}
+
+void hardMode(ref Player p1, ref Player p2, ref Ball ball)
+{
+    p1.speedFactor = 12;
+    p2.speedFactor = 12;
+    ball.radius = 20;
+    ball.speedFactor = 3;
+    ball.color = Colors.WHITE;
 }
