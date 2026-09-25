@@ -10,10 +10,8 @@ struct Player
 {
     Vector2 position;
     Color color;
-
     int radius = 50;
     int points = 0;
-
     double speedFactor = 7.5;
 
     void drawPlayer()
@@ -66,25 +64,13 @@ struct Player
         if (CheckCollisionCircles(position, radius - speedFactor, ball.position, ball.radius))
         {
             if (key == KeyboardKey.KEY_RIGHT || key == KeyboardKey.KEY_D)
-            {
                 position.x -= speedFactor;
-                // (position - ball.position).y > 0 ? (position.y += 1) : (position.y -= 1);
-            }
             if (key == KeyboardKey.KEY_LEFT || key == KeyboardKey.KEY_A)
-            {
                 position.x += speedFactor;
-                // (position - ball.position).y > 0 ? (position.y += 1) : (position.y -= 1);
-            }
             if (key == KeyboardKey.KEY_UP || key == KeyboardKey.KEY_W)
-            {
                 position.y += speedFactor;
-                // (position - ball.position).x > 0 ? (position.x += 1) : (position.x -= 1);
-            }
             if (key == KeyboardKey.KEY_DOWN || key == KeyboardKey.KEY_S)
-            {
                 position.y -= speedFactor;
-                // (position - ball.position).x > 0 ? (position.x += 1) : (position.x -= 1);
-            }
         }
     }
 
@@ -104,9 +90,7 @@ struct Ball
 {
     Vector2 position = {400, 400};
     Vector2 speed = {0, 0};
-
     Color color = Colors.LIGHTGRAY;
-
     int radius = 30;
     int isPlaying = 0; // 0 - menu screen, 1 - game start, 2 - vs computer mode
 
@@ -133,8 +117,8 @@ struct Ball
             {
                 p1.position = Vector2(400, 40 + p1.radius);
                 p2.position = Vector2(400, 760 - p2.radius);
-                position = Vector2(400.0f, 550.0f);
-                speed = Vector2(0.0f, 0.0f);
+                position = Vector2(400, 550);
+                speed = Vector2(0, 0);
                 p1.points++;
             }
             else
@@ -149,8 +133,8 @@ struct Ball
             {
                 p1.position = Vector2(400, 40 + p1.radius);
                 p2.position = Vector2(400, 760 - p2.radius);
-                position = Vector2(400.0f, 250.0f);
-                speed = Vector2(0.0f, 0.0f);
+                position = Vector2(400, 250);
+                speed = Vector2(0, 0);
                 p2.points++;
             }
             else
@@ -163,7 +147,7 @@ struct Ball
         speed *= 0.991;
     }
 
-    void checkCollisionWithPlayer(ref Player player)
+    bool checkCollisionWithPlayer(ref Player player)
     {
         bool ballkicked;
         if (CheckCollisionCircles(player.position, player.radius, position, radius))
@@ -174,18 +158,13 @@ struct Ball
             }
         }
         player.kickAnimation(ballkicked);
+        return ballkicked;
     }
 }
 
 void reset(ref Player p1, ref Player p2, ref Ball ball)
 {
-    p1.position = Vector2(400, 90);
-    p2.position = Vector2(400, 710);
-    p1.speedFactor = 7.5;
-    p2.speedFactor = 7.5;
-    p1.points = 0;
-    p2.points = 0;
-    ball.position = Vector2(400.0f, 400.0f);
-    ball.speed = Vector2(0.0f, 0.0f);
-    ball.isPlaying = 0;
+    p1 = Player(Vector2(400, 90), Colors.RED, 50, 0, 7.5);
+    p2 = Player(Vector2(400, 710), Colors.BLUE, 50, 0, 7.5);
+    ball = Ball(Vector2(400, 400), Vector2(0, 0), Colors.LIGHTGRAY, 30, 0);
 }
