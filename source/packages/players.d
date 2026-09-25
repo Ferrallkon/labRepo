@@ -182,6 +182,7 @@ void reset(ref Player p1, ref Player p2, ref Ball ball)
     p1.position = Vector2(400, 90);
     p2.position = Vector2(400, 710);
     p1.speedFactor = 7.5;
+    p2.speedFactor = 7.5;
     p1.points = 0;
     p2.points = 0;
     ball.position = Vector2(400.0f, 400.0f);

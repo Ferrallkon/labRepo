@@ -66,11 +66,6 @@ void main()
         {
             if (IsKeyPressed(KeyboardKey.KEY_R))
                 reset(p1, p2, ball);
-            if (IsKeyPressed(KeyboardKey.KEY_P)){
-                p2.speedFactor = 15;
-                p1.speedFactor = 15;
-                ball.radius = 10;
-            }
 
             if (IsKeyDown(KeyboardKey.KEY_D))
                 p1.movePlayer(KeyboardKey.KEY_D, ball);
